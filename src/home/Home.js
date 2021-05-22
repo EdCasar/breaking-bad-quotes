@@ -1,45 +1,34 @@
-import {useState, useEffect} from 'react';
-
-import useQuotes from '../hooks/useQuotes';
-import useCharacters from '../hooks/useCharacters';
+import useCharAndQuote from '../hooks/useCharAndQuote';
+import CardQuote from '../components/cardQuote/CardQuote';
 
 const Home = () => {
-	const quote = useQuotes();
-	const character = useCharacters();
-	const [charAndQuote, setCharAndQuote] = useState([]);
+  const charAndQuote = useCharAndQuote();
+  return (
+    <div>
+      <h1>Home</h1>
+      {charAndQuote ? (
+        charAndQuote.map(({char_id, name, img, quote, quote_id, quotes}) => (
+          <div key={Math.random()}>
+            <img src={img} width="200" alt="" />
+            <p>{name}</p>
 
-	useEffect(() => {
-		if (character) {
-			character.map(each => {
-				if (quote) {
-					const nameAll = quote.filter(fil => fil.author === each.name);
-					if (nameAll.length > 0) {
-						each.quotes = nameAll;
-						setCharAndQuote(state => [...state, each]);
-					}
-				}
-			});
-		}
-	}, [character, quote]);
-	return (
-		<div>
-		<h1>Home</h1>
-		{charAndQuote ? (
-			charAndQuote.map(({char_id, name, img, quote, quote_id, quotes}) => (
-				<div key={Math.random()}>
-				<img src={img} width="200" alt="" />
-				<p>{name}</p>
-
-				{quotes
-					? quotes.map(ea => <li key={ea.quote_id}>{ea.quote}</li>)
-					: null}
-				</div>
-			))
-		) : (
-			<p>Loading...</p>
-		)}
-		</div>
-	);
+            {quotes
+              ? quotes.map(each => (
+                  <CardQuote
+                    key={each.quote_id}
+                    {...each}
+                    add={true}
+                    remove={false}
+                  />
+                ))
+              : null}
+          </div>
+        ))
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
 };
 
 export default Home;
