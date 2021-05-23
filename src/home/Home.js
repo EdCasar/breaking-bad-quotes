@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {SkipPrevious, SkipNext} from '@material-ui/icons'
+import {SkipPrevious, SkipNext} from '@material-ui/icons';
 import useCharAndQuote from '../hooks/useCharAndQuote';
 import CardQuote from '../components/cardQuote/CardQuote';
 
@@ -32,14 +32,18 @@ const Home = () => {
   return (
     <div className="home">
       <div className="pagination">
-        <button className="prev"onClick={prevPage}><SkipPrevious/>Prev</button>
-        <p >
+        <button className="prev" onClick={prevPage}>
+          <SkipPrevious />
+          Prev
+        </button>
+        <p>
           Página {count} de {totalPages}
         </p>
-        <p >
-          Total: {charAndQuote && charAndQuote.length}
-        </p>
-        <button className="next"onClick={nextPage}>Next<SkipNext /></button>
+        <p>Total: {charAndQuote && charAndQuote.length}</p>
+        <button className="next" onClick={nextPage}>
+          Next
+          <SkipNext />
+        </button>
       </div>
       {charAndQuote ? (
         pageData().map(({char_id, name, img, quote, quote_id, quotes}) => (
@@ -57,6 +61,7 @@ const Home = () => {
                     key={each.quote_id}
                     {...each}
                     add={true}
+                    img={img}
                     remove={false}
                   />
                 ))
