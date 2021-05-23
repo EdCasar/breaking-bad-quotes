@@ -1,0 +1,48 @@
+header {
+  @include flex(row, space-around);
+  box-shadow: 0.1rem 0.1rem 0.5rem #000;
+  background: url('../images/background.jpg') no-repeat fixed center;
+  background-size: 100% 100%;
+  position: sticky;
+  z-index: 9;
+  top: 0;
+  .logo {
+    img {
+      width: 150px;
+      @media (max-width: 430px) {
+        width: 120px;
+      }
+      @media (max-width: 380px) {
+        width: 100px;
+      }
+    }
+  }
+  nav {
+    ul {
+      @include flex(row, center);
+      li {
+        list-style: none;
+        a {
+          text-decoration: none;
+          padding: 0.5rem 1.5rem;
+          color: $green-color;
+          color: $green-color2;
+          font-weight: bold;
+          font-size: var(--font-s-large);
+          transition: $transition;
+          span {
+            background: var(--green-gradient);
+            color: $black-color;
+            padding: 0.1rem;
+            box-shadow: 2px 2px 0.5rem #222 inset;
+            transition: $transition;
+          }
+          &:hover,
+          &:hover span {
+            color: $white-color;
+          }
+        }
+      }
+    }
+  }
+}

@@ -20,7 +20,6 @@ const useCharAndQuote = () => {
         }
       });
     }
-	  console.log('refresh')
   }, [character, quote]);
 
   return charAndQuote;

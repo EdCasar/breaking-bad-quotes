@@ -1,0 +1,134 @@
+.home {
+  @include border-radius();
+  width: 80%;
+  margin: 1rem auto;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.8);
+
+  .eachChar {
+    @include border-radius();
+    margin: 1rem;
+    padding: 1rem;
+    border: 2px solid $black-color;
+    .eachHead {
+      @include flex(column, flex-start);
+      .eachImg {
+        @include border-radius();
+        overflow: hidden;
+        position: relative;
+        width: 200px;
+        height: 300px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: $transition;
+          animation: translateimg 2s;
+          @keyframes translateimg {
+            from {
+              transform: translatey(-100%);
+            }
+            to {
+              transform: translatey(0);
+            }
+          }
+        }
+        h3 {
+          background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, 0.9)
+          );
+          width: 100%;
+          position: absolute;
+          color: $green-color;
+          color: $green-color2;
+          font-size: var(--font-s-large);
+          bottom: 0;
+          text-align: center;
+          left: 0;
+          font-weight: bold;
+          text-shadow: 2px 2px 2px #000;
+          transition: $transition;
+          animation: translateH 2s;
+          @keyframes translateH {
+            from {
+              transform: translatey(100%);
+            }
+            to {
+              transform: translatey(0);
+            }
+          }
+        }
+        &:hover img {
+          transform: scale(1.1);
+        }
+        &:hover h3 {
+          color: $white-color;
+        }
+      }
+    }
+  }
+}
+.mainQuotes {
+  .wrapperQuote {
+    @include border-radius();
+    @include flex(column, flex-start);
+    width: 100%;
+    margin: 1rem 0;
+    padding: 0.5rem 0 0.2rem 0;
+    background: var(--green-gradient);
+    box-shadow: 2px 2px 1rem #000 inset;
+    animation: translateQuote 2s;
+    @keyframes translateQuote {
+      from {
+		  opacity: 0;
+        transform: translateY(100%);
+      }
+      to {
+		  opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .eachQuote {
+      @include flex(row, space-between);
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 110px;
+      .quote {
+        color: $white-color;
+        font-size: var(--font-s-normal);
+        margin: 0 1rem;
+      }
+      .controlsQuote {
+        @include flex(row, flex-end);
+        margin: 0 0.3rem 0 0;
+        button {
+          margin: 0 0.3rem;
+          background: none;
+          border: none;
+          outline: none;
+          font-size: 2rem;
+        }
+        .addFavorite {
+          color: $gray-color;
+        }
+        .removeFavorite {
+          color: #f00;
+        }
+      }
+    }
+    .authorQuote {
+      @include flex(row, flex-end);
+      width: 100%;
+      margin: 0.2rem 0 0 0;
+      i {
+        margin: 0 0.3rem 0 0;
+        font-size: var(--font-s-small);
+        color: $white-color;
+      }
+    }
+  }
+}
+.animQuotes {
+}

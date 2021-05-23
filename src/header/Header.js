@@ -4,8 +4,8 @@ import Logo from '../images/breaking-logo.png';
 const Header = () => {
   return (
     <header>
-      <div>
-        <img src={Logo} alt="" width="300" />
+      <div className="logo">
+        <img src={Logo} alt=""  />
       </div>
       <NavBar />
     </header>

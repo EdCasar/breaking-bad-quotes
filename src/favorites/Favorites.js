@@ -1,24 +1,26 @@
-import useCharAndQuote from '../hooks/useCharAndQuote';
+//import { useEffect } from 'react'
+import useFavorites from '../hooks/useFavorites' 
+//import useQuotes from '../hooks/useQuotes'
 import CardQuote from '../components/cardQuote/CardQuote';
-const Favorites = () => {
-  const charAndQuote = useCharAndQuote();
-  return (
-    <div>
-      <h1>Home</h1>
-      {charAndQuote ? (
-        charAndQuote.map(({char_id, name, img, quote, quote_id, quotes}) => (
-          <div key={Math.random()}>
-            <img src={img} width="200" alt="" />
-            <p>{name}</p>
 
-            {quotes
-              ? quotes.map(each => <CardQuote key={each.quote_id} {...each} add={false} remove={true} />)
-              : null}
-          </div>
-        ))
-      ) : (
-        <p>Loading...</p>
-      )}
+const Favorites = () => {
+//	const quote = useQuotes()
+  const [ favorite ] = useFavorites()
+
+  return (
+    <div className="home">
+	  {
+		  favorite < 0
+		  ? favorite.map( each => (
+                  <CardQuote
+                    key={each.quote_id}
+                    {...each}
+                    add={false}
+                    remove={true}
+                  />
+		  ))
+		  : <p style={{ color: '#fff'}}>You don´t have Favorites</p>
+	  }
     </div>
   );
 };

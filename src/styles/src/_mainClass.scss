@@ -1,0 +1,19 @@
+.border {
+	border: 2px solid #0f0;
+}
+.ellipse-active {
+	clip-path: ellipse(100% 100%);
+}
+.ellipse-hide {
+	clip-path: ellipse(1rem 1rem at top right);
+	transition: 0.5s;
+}
+.btn {
+	@include btn();
+}
+.btn-primary {
+	@include primary-btn();
+}
+.btn-secundary {
+	@include secundary-btn();
+}

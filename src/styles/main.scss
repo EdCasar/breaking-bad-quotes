@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+	padding: 0;
+}
+@import 'src/roots', 'src/mixins', 'src/mainClass', 'src/header', 'src/home', 'src/pagination';
+
+body {
+  background: url('../images/background.jpg') no-repeat fixed center;
+  background-size: 100% 100%;
+  position: relative;
+}

@@ -1,0 +1,28 @@
+.pagination {
+  @include flex(row, space-around);
+  width: 100%;
+  p {
+    color: $green-color;
+    font-size: var(--font-s-normal);
+	font-weight: bold;
+  }
+  button {
+	  @include flex(row, space-around);
+	background: var(--green-gradient);
+    border: none;
+    outline: none;
+    color: $white-color;
+    padding: 0.4rem;
+   font-weight: bold;	
+	box-shadow: .2rem .2rem 1rem #000 inset;
+	font-size: var(--font-normal);
+	transition: $transition;
+	&:hover{color: $green-color}
+  }
+  .next {
+    @include border-radius(0, 0.5rem, 0.5rem, 0);
+  }
+  .prev {
+    @include border-radius(0.5rem, 0, 0, 0.5rem);
+  }
+}

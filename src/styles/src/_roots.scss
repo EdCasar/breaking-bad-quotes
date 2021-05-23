@@ -1,0 +1,37 @@
+$black-color: #111;
+$white-color: #aaa;
+$gray-color: #777;
+$green-color: #062;
+$green-color2: #043;
+$transition: 0.5s;
+:root {
+  --black-color: #111;
+  --white-color: #eee;
+  --gray-color: #999;
+  --green-color: #0f0;
+
+  --green-gradient: linear-gradient(to bottom right, #043, #061);
+  --font-s-small: 0.8rem;
+  --font-s-normal: 1rem;
+  --font-s-large: 1.5rem;
+  --font-s-big: 3rem;
+
+  @media (max-width: 700px) {
+    --font-s-small: 0.7rem;
+    --font-s-normal: 0.9rem;
+    --font-s-large: 1.3rem;
+    --font-s-big: 2rem;
+  }
+  @media (max-width: 430px) {
+    --font-s-small: 0.6rem;
+    --font-s-normal: 0.8rem;
+    --font-s-large: 1.2rem;
+    --font-s-big: 1.5rem;
+  }
+  @media (max-width: 330px) {
+    --font-s-small: 0.5rem;
+    --font-s-normal: 0.7rem;
+    --font-s-large: 1rem;
+    --font-s-big: 1.2rem;
+  }
+}
