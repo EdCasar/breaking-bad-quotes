@@ -13,6 +13,7 @@ const Main = ({data, change}) => {
     if (change) {
       setPage(0);
       setCount(1);
+		setShowForPage(1)
     }
   }, [change]);
 

@@ -11,7 +11,7 @@ const Home = () => {
 
   useEffect(() => {
     setData(charAndQuote);
-  });
+  },[charAndQuote]);
   //busqueda por filtros
   const searchInFields = (word, key) => {
     setSearchAll(word, key);

@@ -24,7 +24,7 @@ const CardQuote = ({
     isFavorite: false,
     rating: [],
   };
-	
+
   const setLocalFav = fav => {
     fav.isFavorite = true;
     localStorage.setItem(fav.quote_id, JSON.stringify(fav));
@@ -59,23 +59,21 @@ const CardQuote = ({
       }
       if (getLocal.rating.length) {
         let num = 0;
-        getLocal.rating.map(each => {
-          num = num + parseInt(each);
-        });
+        getLocal.rating.map(each => ( num = num + parseInt(each)));
         let totalRating = Math.ceil(num / getLocal.rating.length);
         setRating(totalRating);
       }
     }
 
     // console.log(getLocal);
-  }, [isFav, rating]);
+  }, [isFav, rating, quote_id]);
   return (
     <div className="mainQuotes">
       <div className="wrapperQuote ">
         <div className="eachQuote ">
           <div className="quote">
             <i>
-              {remove && <img src={img} width="50" />}
+              {remove && <img src={img} alt={author} width="50" />}
               <FormatQuote />
               {quote}
             </i>
@@ -86,13 +84,13 @@ const CardQuote = ({
                 <>
                   {rating >= str ? (
                     <Star
-                      key={str}
+                      key={Math.random()}
                       style={{fontSize: 12, color: '#ff0'}}
                       onClick={() => handleRating(`${str}`)}
                     />
                   ) : (
                     <Star
-                      key={str}
+                      key={Math.random()}
                       style={{fontSize: 12, color: '#888'}}
                       onClick={() => handleRating(`${str}`)}
                     />

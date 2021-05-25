@@ -4,7 +4,6 @@ const useSearch = data => {
   const [dataIn, setDataIn] = useState();
   const [search, setSearch] = useState('');
   const [results, setResults] = useState(null);
-  const [tem, setTem] = useState([]);
   useEffect(() => {
     setDataIn(data);
   }, [data]);
