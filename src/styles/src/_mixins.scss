@@ -13,39 +13,3 @@ $light-color: #fa0;
 	align-items: $align;
 }
 
-@mixin input($width) {
-	border: none;
-	outline: none;
-	padding: 0.5rem;
-	transition: 0.5s;
-	width: $width;
-	border-width: 0 0 0.1rem 0;
-	border-color: transparent;
-	border-style: solid;
-	&:hover,
-	&:focus {
-		border-color: $light-color;
-	}
-}
-
-@mixin btn() {
-	@include border-radius();
-	min-width: 6rem;
-	padding: 0.6rem;
-	outline: none;
-	border-color: transparent;
-	border-style: solid;
-	border-width: 0 0 0.1rem 0;
-	background: $black-color;
-	color: $white-color;
-}
-@mixin primary-btn() {
-	@include btn();
-	background: none;
-	color: $black-color;
-}
-
-@mixin secundary-btn() {
-	@include btn();
-	border-color: $light-color;
-}

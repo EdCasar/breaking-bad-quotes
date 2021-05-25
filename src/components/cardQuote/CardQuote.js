@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {Favorite,DeleteForever, FormatQuote, Star} from '@material-ui/icons';
+import {Favorite, DeleteForever, FormatQuote, Star} from '@material-ui/icons';
 const star = [1, 2, 3, 4, 5];
 
 const CardQuote = ({
@@ -15,28 +15,60 @@ const CardQuote = ({
 }) => {
   const [isFav, setIsFav] = useState(false);
   const [ofFav, setOfFav] = useState();
+  const [rating, setRating] = useState(0);
   const fav = {
     quote_id,
     quote,
     author,
     img,
     isFavorite: false,
+    rating: [],
   };
+	
   const setLocalFav = fav => {
-    fav.isFavorite = !fav.isFavorite;
-      localStorage.setItem(fav.quote_id, JSON.stringify(fav));
-      setIsFav(true);
+    fav.isFavorite = true;
+    localStorage.setItem(fav.quote_id, JSON.stringify(fav));
+    setIsFav(true);
   };
   const removeLocalFav = fav => {
-    fav.isFavorite = false;
-    localStorage.removeItem(fav.quote_id);
+    const removeFav = JSON.parse(localStorage.getItem(quote_id));
+    removeFav.isFavorite = false;
+    localStorage.setItem(fav.quote_id, JSON.stringify(removeFav));
     setIsFav(false);
+
+    //función para actualizar el estado del componente padre
     changeFavorite();
   };
+
+  const handleRating = ran => {
+    const ratingFav = JSON.parse(localStorage.getItem(quote_id));
+    if (ratingFav) {
+      ratingFav.rating.push(ran);
+      localStorage.setItem(fav.quote_id, JSON.stringify(ratingFav));
+    } else {
+      fav.rating.push(ran);
+      localStorage.setItem(fav.quote_id, JSON.stringify(fav));
+    }
+    setRating();
+  };
   useEffect(() => {
-    const joinFav = localStorage.getItem(quote_id);
-    joinFav && setOfFav(joinFav);
-  }, [isFav]);
+    const getLocal = JSON.parse(localStorage.getItem(quote_id));
+    if (getLocal) {
+      if (getLocal.isFavorite) {
+        setOfFav(getLocal);
+      }
+      if (getLocal.rating.length) {
+        let num = 0;
+        getLocal.rating.map(each => {
+          num = num + parseInt(each);
+        });
+        let totalRating = Math.ceil(num / getLocal.rating.length);
+        setRating(totalRating);
+      }
+    }
+
+    // console.log(getLocal);
+  }, [isFav, rating]);
   return (
     <div className="mainQuotes">
       <div className="wrapperQuote ">
@@ -51,7 +83,21 @@ const CardQuote = ({
           <div className="controlsQuote">
             <div>
               {star.map(str => (
-                <Star key={str} style={{fontSize: 12, color: '#777'}} />
+                <>
+                  {rating >= str ? (
+                    <Star
+                      key={str}
+                      style={{fontSize: 12, color: '#ff0'}}
+                      onClick={() => handleRating(`${str}`)}
+                    />
+                  ) : (
+                    <Star
+                      key={str}
+                      style={{fontSize: 12, color: '#888'}}
+                      onClick={() => handleRating(`${str}`)}
+                    />
+                  )}
+                </>
               ))}
             </div>
             {add && (
@@ -72,7 +118,7 @@ const CardQuote = ({
                 title="Remove from my favorite"
                 onClick={() => removeLocalFav(fav)}
                 className="removeFavorite">
-                <DeleteForever/>
+                <DeleteForever />
               </button>
             )}
           </div>

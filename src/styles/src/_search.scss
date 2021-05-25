@@ -1,0 +1,26 @@
+.wrapperSearch {
+  @include flex(row, space-around);
+  margin: 1rem 0;
+  padding: 0.5rem;
+  .inputFields {
+    @include border-radius(1rem ,1rem ,1rem, 1rem);
+    overflow: hidden;
+
+    input {
+      padding: 0.5rem;
+      color: $black-color;
+      font-size: var(--font-s-normal);
+	  outline: none;
+	  background: $white-color;
+	  box-shadow: .2rem .2rem .6rem $black-color inset;
+	  border-width: 0 0 .2rem 0;
+	  border-color: $white-color;
+	  border-style: solid;
+	  transition: $transition;
+	  &:focus, &:hover{
+       border-color: $green-color; 
+	  }
+
+    }
+  }
+}

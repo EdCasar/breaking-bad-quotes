@@ -1,78 +1,41 @@
-import {useState, useEffect} from 'react';
-import {SkipPrevious, SkipNext} from '@material-ui/icons';
+import {useState, useEffect, memo} from 'react';
 import useCharAndQuote from '../hooks/useCharAndQuote';
-import CardQuote from '../components/cardQuote/CardQuote';
+import Search from '../components/search/Search';
+import Main from './Main';
+import useSearch from '../hooks/useSearch';
 
 const Home = () => {
   const charAndQuote = useCharAndQuote();
-  //paginación
-  const [page, setPage] = useState(0);
-  const [showForPage, setShowForPage] = useState(1);
-  const [count, setCount] = useState(1);
+  const [data, setData] = useState();
+  const [results, search, setSearchAll] = useSearch(data);
 
   useEffect(() => {
-    setPage(0);
-  }, [charAndQuote]);
-
-  const totalPages =
-    charAndQuote && Math.ceil(charAndQuote.length / showForPage);
-
-  const pageData = () => {
-    if (charAndQuote) return charAndQuote.slice(page, page + showForPage);
-  };
-
-  const prevPage = () => {
-    if (page > 0) setPage(page - showForPage);
-    if (count > 1 && count <= totalPages) setCount(count - 1);
-  };
-  const nextPage = () => {
-    if (page < charAndQuote.length - showForPage) setPage(page + showForPage);
-    if (count < totalPages) setCount(count + 1);
+    setData(charAndQuote);
+  });
+  //busqueda por filtros
+  const searchInFields = (word, key) => {
+    setSearchAll(word, key);
   };
   return (
     <div className="home">
-      <div className="pagination">
-        <button className="prev" onClick={prevPage}>
-          <SkipPrevious />
-          Prev
-        </button>
-        <p>
-          Página {count} de {totalPages}
-        </p>
-        <p>Total: {charAndQuote && charAndQuote.length}</p>
-        <button className="next" onClick={nextPage}>
-          Next
-          <SkipNext />
-        </button>
+      <div className="wrapperSearch">
+        <Search
+          searchInFields={searchInFields}
+          searchFor={'char_id'}
+          name="Character ID"
+        />
+        <Search
+          searchInFields={searchInFields}
+          searchFor={'name'}
+          name="Author"
+        />
       </div>
-      {charAndQuote ? (
-        pageData().map(({char_id, name, img, quote, quote_id, quotes}) => (
-          <div className="eachChar" key={Math.random()}>
-            <div className="eachHead">
-              <div className="eachImg">
-                <img src={img} alt="" />
-                <h3>{name}</h3>
-              </div>
-            </div>
-
-            {quotes
-              ? quotes.map(each => (
-                  <CardQuote
-                    key={each.quote_id}
-                    {...each}
-                    add={true}
-                    img={img}
-                    remove={false}
-                  />
-                ))
-              : null}
-          </div>
-        ))
-      ) : (
-        <p>Loading...</p>
-      )}
+      <Main
+        data={search.length > 0 ? results : data}
+        change={search.length > 0 ? true : null}
+      />
     </div>
   );
 };
 
-export default Home;
+export default memo(Home);

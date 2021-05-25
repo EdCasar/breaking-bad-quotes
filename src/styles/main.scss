@@ -2,7 +2,7 @@
     margin: 0;
 	padding: 0;
 }
-@import 'src/roots', 'src/mixins', 'src/mainClass', 'src/header', 'src/home', 'src/pagination';
+@import 'src/roots', 'src/mixins', 'src/mainClass', 'src/header', 'src/home', 'src/pagination', 'src/search';
 
 body {
   background: url('../images/background.jpg') no-repeat fixed center;

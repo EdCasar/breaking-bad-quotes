@@ -8,12 +8,3 @@
 	clip-path: ellipse(1rem 1rem at top right);
 	transition: 0.5s;
 }
-.btn {
-	@include btn();
-}
-.btn-primary {
-	@include primary-btn();
-}
-.btn-secundary {
-	@include secundary-btn();
-}

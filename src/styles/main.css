@@ -44,42 +44,6 @@
   clip-path: ellipse(1rem 1rem at top right);
   transition: 0.5s; }
 
-.btn {
-  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-  min-width: 6rem;
-  padding: 0.6rem;
-  outline: none;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 0 0 0.1rem 0;
-  background: #111;
-  color: #aaa; }
-
-.btn-primary {
-  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-  min-width: 6rem;
-  padding: 0.6rem;
-  outline: none;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 0 0 0.1rem 0;
-  background: #111;
-  color: #aaa;
-  background: none;
-  color: #111; }
-
-.btn-secundary {
-  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-  min-width: 6rem;
-  padding: 0.6rem;
-  outline: none;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 0 0 0.1rem 0;
-  background: #111;
-  color: #aaa;
-  border-color: #fa0; }
-
 header {
   display: flex;
   justify-content: space-around;
@@ -301,6 +265,33 @@ header nav ul li a:hover span {
 
 .pagination .prev {
   border-radius: 0.5rem 0 0 0.5rem; }
+
+.wrapperSearch {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+  margin: 1rem 0;
+  padding: 0.5rem; }
+
+.wrapperSearch .inputFields {
+  border-radius: 1rem 1rem 1rem 1rem;
+  overflow: hidden; }
+
+.wrapperSearch .inputFields input {
+  padding: 0.5rem;
+  color: #111;
+  font-size: var(--font-s-normal);
+  outline: none;
+  background: #aaa;
+  box-shadow: 0.2rem 0.2rem 0.6rem #111 inset;
+  border-width: 0 0 .2rem 0;
+  border-color: #aaa;
+  border-style: solid;
+  transition: 0.5s; }
+
+.wrapperSearch .inputFields input:focus, .wrapperSearch .inputFields input:hover {
+  border-color: #062; }
 
 body {
   background: url("../images/background.jpg") no-repeat fixed center;
