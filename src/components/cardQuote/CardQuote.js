@@ -1,34 +1,34 @@
 import {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {Favorite, DeleteForever, FormatQuote, Star} from '@material-ui/icons';
+import {
+  Favorite,
+  DeleteForever,
+  Textsms as FormatQuote,
+} from '@material-ui/icons';
+import Rating from '../rating/Rating';
+import Comments from '../comments/Comments';
+import NewComment from '../comments/NewComment';
 const star = [1, 2, 3, 4, 5];
 
-const CardQuote = ({
-  quote_id,
-  quote,
-  author,
-  img,
-  series,
-  add,
-  remove,
-  changeFavorite,
-}) => {
+const CardQuote = ({ quote_id, quote, author, img, series, add, remove, changeFavorite, }) => {
   const [isFav, setIsFav] = useState(false);
   const [ofFav, setOfFav] = useState();
   const [rating, setRating] = useState(0);
-  const fav = {
-    quote_id,
-    quote,
-    author,
-    img,
-    isFavorite: false,
-    rating: [],
-  };
+  const [comments, setComments] = useState([]);
+  const fav = { quote_id, quote, author, img, isFavorite: false, rating: [], comments: [], };
 
   const setLocalFav = fav => {
-    fav.isFavorite = true;
-    localStorage.setItem(fav.quote_id, JSON.stringify(fav));
-    setIsFav(true);
+    const newFavorite = JSON.parse(localStorage.getItem(quote_id));
+    if (newFavorite) {
+        newFavorite.isFavorite = true;
+        localStorage.setItem(newFavorite.quote_id, JSON.stringify(newFavorite));
+        setIsFav(true);
+      
+    } else {
+      fav.isFavorite = true;
+      localStorage.setItem(fav.quote_id, JSON.stringify(fav));
+      setIsFav(true);
+    }
   };
   const removeLocalFav = fav => {
     const removeFav = JSON.parse(localStorage.getItem(quote_id));
@@ -40,13 +40,25 @@ const CardQuote = ({
     changeFavorite();
   };
 
+  const setNewComment = e => {
+    const newComment = JSON.parse(localStorage.getItem(quote_id));
+    if (newComment) {
+      if (newComment.comments) {
+        newComment.comments = [...newComment.comments, e];
+        localStorage.setItem(newComment.quote_id, JSON.stringify(newComment));
+      }
+    } else {
+      fav.comments = [...fav.comments, e];
+      localStorage.setItem(fav.quote_id, JSON.stringify(fav));
+    }
+  };
   const handleRating = ran => {
     const ratingFav = JSON.parse(localStorage.getItem(quote_id));
     if (ratingFav) {
-      ratingFav.rating.push(ran);
+      ratingFav.rating = [...ratingFav.rating, ran];
       localStorage.setItem(fav.quote_id, JSON.stringify(ratingFav));
     } else {
-      fav.rating.push(ran);
+      fav.rating = [...fav.rating, ran];
       localStorage.setItem(fav.quote_id, JSON.stringify(fav));
     }
     setRating();
@@ -59,13 +71,11 @@ const CardQuote = ({
       }
       if (getLocal.rating.length) {
         let num = 0;
-        getLocal.rating.map(each => ( num = num + parseInt(each)));
+        getLocal.rating.map(each => (num = num + parseInt(each)));
         let totalRating = Math.ceil(num / getLocal.rating.length);
         setRating(totalRating);
       }
     }
-
-    // console.log(getLocal);
   }, [isFav, rating, quote_id]);
   return (
     <div className="mainQuotes">
@@ -79,25 +89,7 @@ const CardQuote = ({
             </i>
           </div>
           <div className="controlsQuote">
-            <div>
-              {star.map(str => (
-                <>
-                  {rating >= str ? (
-                    <Star
-                      key={Math.random()}
-                      style={{fontSize: 12, color: '#ff0'}}
-                      onClick={() => handleRating(`${str}`)}
-                    />
-                  ) : (
-                    <Star
-                      key={Math.random()}
-                      style={{fontSize: 12, color: '#888'}}
-                      onClick={() => handleRating(`${str}`)}
-                    />
-                  )}
-                </>
-              ))}
-            </div>
+            <Rating star={star} rating={rating} handleRating={handleRating} />
             {add && (
               <button
                 title="Add my favorite"
@@ -122,6 +114,8 @@ const CardQuote = ({
           </div>
         </div>
         <div className="authorQuote">{remove && <i>{author}</i>}</div>
+        <Comments />
+        <NewComment setNewComment={setNewComment} />
       </div>
     </div>
   );

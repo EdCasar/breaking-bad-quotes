@@ -53,7 +53,7 @@ const Main = ({data, change}) => {
             {quotes
               ? quotes.map(each => (
                   <CardQuote
-                    key={each.quote_id}
+                    key={Math.random()}
                     {...each}
                     add={true}
                     img={img}

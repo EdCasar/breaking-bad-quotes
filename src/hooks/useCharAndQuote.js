@@ -10,7 +10,7 @@ const useCharAndQuote = () => {
 
   useEffect(() => {
     if (character) {
-      character.map(each => { 
+      character.map(each => {
         if (quote) {
           const nameAll = quote.filter(fil => fil.author === each.name);
           if (nameAll.length > 0) {

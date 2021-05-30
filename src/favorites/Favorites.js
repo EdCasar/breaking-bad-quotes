@@ -22,7 +22,7 @@ const Favorites = () => {
         data.map(each => (
           <CardQuote
             changeFavorite={changeFavorite}
-            key={each.quote_id}
+            key={Math.random()}
             {...each}
             add={false}
             remove={true}
