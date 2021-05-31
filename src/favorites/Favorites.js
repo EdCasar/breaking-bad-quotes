@@ -23,7 +23,7 @@ const Favorites = () => {
           <CardQuote
             changeFavorite={changeFavorite}
             key={Math.random()}
-            {...each}
+            eachQuote={each}
             add={false}
             remove={true}
           />

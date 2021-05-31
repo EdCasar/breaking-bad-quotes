@@ -2,11 +2,10 @@ import PropTypes from 'prop-types';
 import {Star} from '@material-ui/icons';
 
 const Rating = ({star, rating, handleRating}) => {
-
   return (
     <div>
       {star.map(str => (
-        <>
+        <span key={Math.random()}>
           {rating >= str ? (
             <Star
               key={Math.random()}
@@ -20,14 +19,14 @@ const Rating = ({star, rating, handleRating}) => {
               onClick={() => handleRating(`${str}`)}
             />
           )}
-        </>
+        </span>
       ))}
     </div>
   );
 };
 Rating.propTypes = {
-    start: PropTypes.string, 
-    rating: PropTypes.number, 
-    handleRating: PropTypes.func, 
-}
-export default Rating
+  start: PropTypes.string,
+  rating: PropTypes.number,
+  handleRating: PropTypes.func,
+};
+export default Rating;

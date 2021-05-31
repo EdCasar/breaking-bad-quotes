@@ -24,6 +24,7 @@ const Main = ({data, change}) => {
   };
 
   const prevPage = () => {
+
     if (page > 0) setPage(page - showForPage);
     if (count > 1 && count <= totalPages) setCount(count - 1);
   };
@@ -55,6 +56,7 @@ const Main = ({data, change}) => {
                   <CardQuote
                     key={Math.random()}
                     {...each}
+				    eachQuote={each}
                     add={true}
                     img={img}
                     remove={false}

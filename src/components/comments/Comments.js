@@ -1,9 +1,8 @@
-const Comments = () => {
-  const comments = null;
+const Comments = ({ allComments }) => {
   return (
 		<ul className="ShowComments">
-	      {comments 
-			  ? comments.map(each => <li>{each}</li>) 
+	      {allComments.length
+			  ? allComments.map(each => <li key={Math.random()}>{each}</li>) 
 			  : <p style={{ color: '#888'}}>Not comments</p>}
 	    </ul>
 
