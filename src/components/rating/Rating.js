@@ -3,7 +3,7 @@ import {Star} from '@material-ui/icons';
 
 const Rating = ({star, rating, handleRating}) => {
   return (
-    <div>
+    <div className="rating">
       {star.map(str => (
         <span key={Math.random()}>
           {rating >= str ? (

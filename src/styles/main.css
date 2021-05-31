@@ -103,11 +103,21 @@ header nav ul li a:hover span {
   padding: 1rem;
   background: rgba(0, 0, 0, 0.8); }
 
+@media (max-width: 450px) {
+  .home {
+    width: 95%;
+    padding: .4rem; } }
+
 .home .eachChar {
   border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-  margin: 1rem;
+  margin: 1rem auto;
   padding: 1rem;
   border: 2px solid #111; }
+
+@media (max-width: 450px) {
+  .home .eachChar {
+    margin: 0.2rem;
+    padding: 0.3rem; } }
 
 .home .eachChar .eachHead {
   display: flex;
@@ -188,9 +198,7 @@ header nav ul li a:hover span {
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 110px; }
+  width: 100%; }
 
 .mainQuotes .wrapperQuote .eachQuote .quote {
   color: #aaa;
@@ -217,6 +225,12 @@ header nav ul li a:hover span {
 .mainQuotes .wrapperQuote .eachQuote .controlsQuote .removeFavorite {
   color: #f00; }
 
+.mainQuotes .wrapperQuote .eachQuote .controlsQuote .rating {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center; }
+
 .mainQuotes .wrapperQuote .authorQuote {
   display: flex;
   justify-content: flex-end;
@@ -229,6 +243,59 @@ header nav ul li a:hover span {
   margin: 0 0.3rem 0 0;
   font-size: var(--font-s-small);
   color: #aaa; }
+
+.mainQuotes .ShowComments {
+  margin: 0.5rem 0;
+  width: 90%;
+  padding: 0.3rem; }
+
+.mainQuotes .ShowComments li {
+  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  font-style: italic;
+  padding: 0.5rem;
+  background: var(--green-gradient);
+  font-size: var(--font-s-normal);
+  margin: 0.2rem 0;
+  color: #777;
+  list-style: none;
+  box-shadow: 0.1rem 0.2rem 1rem #111 inset; }
+
+.mainQuotes .ShowComments p {
+  font-size: var(--font-s-normal);
+  margin: 0.2rem 0;
+  color: #777; }
+
+.mainQuotes .newComment {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+  width: 70%;
+  border: 2px solid #777;
+  position: relative;
+  overflow: hidden; }
+
+.mainQuotes .newComment input {
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0.3rem;
+  color: #777; }
+
+.mainQuotes .newComment button {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #777; }
 
 .pagination {
   display: flex;

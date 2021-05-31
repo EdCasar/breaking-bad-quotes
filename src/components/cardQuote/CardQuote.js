@@ -1,10 +1,6 @@
 import {useState, useEffect, useReducer} from 'react';
 import PropTypes from 'prop-types';
-import {
-  Favorite,
-  DeleteForever,
-  Textsms as FormatQuote,
-} from '@material-ui/icons';
+import {Favorite, DeleteForever } from '@material-ui/icons';
 import Rating from '../rating/Rating';
 import Comments from '../comments/Comments';
 import NewComment from '../comments/NewComment';
@@ -26,22 +22,20 @@ const quoteReducer = (state, action) => {
       return state;
   }
 };
-const CardQuote = ({add, img, remove, changeFavorite, eachQuote}) => {
-  //const data = {...eachQuote}
+const CardQuote = ({img, remove = false, changeFavorite, eachQuote}) => {
   const newData = {img, isFavorite: false, rating: [], comments: []};
   const data = {...eachQuote, ...newData};
   const [quoteState, dispatch] = useReducer(quoteReducer, data);
-  const [isFav, setIsFav] = useState(false);
   const [rating, setRating] = useState(0);
   //***************
   const updateLocal = () => {
     const getLocal = JSON.parse(localStorage.getItem(quoteState.quote_id));
     if (getLocal) {
-        dispatch({
-          type: 'QUOTE_FAVORITE',
-          name: 'isFavorite',
-          payload: getLocal.isFavorite,
-        });
+      dispatch({
+        type: 'QUOTE_FAVORITE',
+        name: 'isFavorite',
+        payload: getLocal.isFavorite,
+      });
       if (getLocal.comments) {
         dispatch({
           type: 'QUOTE_COMMENTS',
@@ -83,27 +77,22 @@ const CardQuote = ({add, img, remove, changeFavorite, eachQuote}) => {
     changeFavorite();
   };
 
-  const setNewComment = e => {
+  const handlerState = (name, e) => {
     const getLocal = JSON.parse(localStorage.getItem(quoteState.quote_id));
     if (getLocal) {
-      getLocal.comments = [...getLocal.comments, e];
+      getLocal[name] = [...getLocal[name], e];
       localStorage.setItem(getLocal.quote_id, JSON.stringify(getLocal));
     } else {
-      quoteState.comments = [...quoteState.comments, e];
+      quoteState[name] = [...quoteState[name], e];
       localStorage.setItem(quoteState.quote_id, JSON.stringify(quoteState));
     }
     updateLocal();
   };
+  const setNewComment = e => {
+    handlerState('comments', e);
+  };
   const handleRating = ran => {
-    const getLocal = JSON.parse(localStorage.getItem(quoteState.quote_id));
-    if (getLocal) {
-      getLocal.rating = [...getLocal.rating, ran];
-      localStorage.setItem(getLocal.quote_id, JSON.stringify(getLocal));
-    } else {
-      quoteState.rating = [...quoteState.rating, ran];
-      localStorage.setItem(quoteState.quote_id, JSON.stringify(quoteState));
-    }
-    updateLocal();
+    handlerState('rating', ran);
   };
   return (
     <div className="mainQuotes">
@@ -114,7 +103,6 @@ const CardQuote = ({add, img, remove, changeFavorite, eachQuote}) => {
               {remove && (
                 <img src={eachQuote.img} alt={quoteState.author} width="50" />
               )}
-              <FormatQuote />
               {quoteState.quote}
             </i>
           </div>

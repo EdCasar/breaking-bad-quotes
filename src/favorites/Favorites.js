@@ -24,7 +24,6 @@ const Favorites = () => {
             changeFavorite={changeFavorite}
             key={Math.random()}
             eachQuote={each}
-            add={false}
             remove={true}
           />
         ))

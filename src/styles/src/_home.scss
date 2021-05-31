@@ -4,12 +4,19 @@
   margin: 1rem auto;
   padding: 1rem;
   background: rgba(0, 0, 0, 0.8);
-
+  @media (max-width: 450px) {
+    width: 95%;
+     padding: .4rem;
+  }
   .eachChar {
     @include border-radius();
-    margin: 1rem;
+    margin: 1rem auto;
     padding: 1rem;
     border: 2px solid $black-color;
+    @media (max-width: 450px) {
+      margin: 0.2rem;
+      padding: 0.3rem;
+    }
     .eachHead {
       @include flex(column, flex-start);
       .eachImg {
@@ -93,8 +100,8 @@
     .eachQuote {
       @include flex(row, space-between);
       width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 110px;
+      //display: grid;
+      //grid-template-columns: 1fr 150px;
       .quote {
         color: $white-color;
         font-size: var(--font-s-normal);
@@ -116,6 +123,9 @@
         .removeFavorite {
           color: #f00;
         }
+        .rating {
+          @include flex(row, center);
+        }
       }
     }
     .authorQuote {
@@ -127,6 +137,53 @@
         font-size: var(--font-s-small);
         color: $white-color;
       }
+    }
+  }
+  .ShowComments {
+    margin: 0.5rem 0;
+    width: 90%;
+    padding: 0.3rem;
+    li {
+      @include border-radius();
+      @include flex(row, flex-start);
+      font-style: italic;
+      padding: 0.5rem;
+      background: var(--green-gradient);
+      font-size: var(--font-s-normal);
+      margin: 0.2rem 0;
+      color: $gray-color;
+      list-style: none;
+      box-shadow: 0.1rem 0.2rem 1rem $black-color inset;
+    }
+	p{
+      font-size: var(--font-s-normal);
+      margin: 0.2rem 0;
+      color: $gray-color;
+	}
+  }
+  .newComment {
+    @include flex(row, center);
+    @include border-radius();
+    width: 70%;
+    border: 2px solid $gray-color;
+    position: relative;
+    overflow: hidden;
+    input {
+      width: 100%;
+      background: none;
+      border: none;
+      outline: none;
+      padding: 0.3rem;
+      color: $gray-color;
+    }
+    button {
+      position: absolute;
+      right: 0;
+      background: none;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      color: $gray-color;
     }
   }
 }

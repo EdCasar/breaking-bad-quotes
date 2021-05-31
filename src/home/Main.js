@@ -55,11 +55,8 @@ const Main = ({data, change}) => {
               ? quotes.map(each => (
                   <CardQuote
                     key={Math.random()}
-                    {...each}
 				    eachQuote={each}
-                    add={true}
                     img={img}
-                    remove={false}
                   />
                 ))
               : null}

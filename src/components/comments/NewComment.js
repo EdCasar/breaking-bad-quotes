@@ -1,3 +1,5 @@
+
+import {Send} from '@material-ui/icons';
 import {useState, useRef} from 'react';
 const NewComment = ({setNewComment}) => {
   const [comment, setComment] = useState();
@@ -18,7 +20,7 @@ const NewComment = ({setNewComment}) => {
         onChange={handlerInput}
         placeholder="Your comments Here"
       />
-      <button>Send</button>
+      <button><Send /></button>
     </form>
   );
 };
