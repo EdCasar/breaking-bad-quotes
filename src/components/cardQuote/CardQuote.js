@@ -1,8 +1,9 @@
 import {useState, useEffect, useReducer} from 'react';
 import PropTypes from 'prop-types';
-import {Favorite, DeleteForever } from '@material-ui/icons';
+import {Favorite, DeleteForever} from '@material-ui/icons';
 import Rating from '../rating/Rating';
 import Comments from '../comments/Comments';
+
 import NewComment from '../comments/NewComment';
 const star = [1, 2, 3, 4, 5];
 
@@ -13,6 +14,7 @@ const quoteReducer = (state, action) => {
         ...state,
         [action.name]: action.payload,
       };
+
     case 'QUOTE_COMMENTS':
       return {
         ...state,
@@ -22,11 +24,12 @@ const quoteReducer = (state, action) => {
       return state;
   }
 };
-const CardQuote = ({img, remove = false, changeFavorite, eachQuote}) => {
+const CardQuote = ({eachQuote, img, changeFavorite, remove = false}) => {
   const newData = {img, isFavorite: false, rating: [], comments: []};
   const data = {...eachQuote, ...newData};
   const [quoteState, dispatch] = useReducer(quoteReducer, data);
   const [rating, setRating] = useState(0);
+
   //***************
   const updateLocal = () => {
     const getLocal = JSON.parse(localStorage.getItem(quoteState.quote_id));
@@ -36,19 +39,15 @@ const CardQuote = ({img, remove = false, changeFavorite, eachQuote}) => {
         name: 'isFavorite',
         payload: getLocal.isFavorite,
       });
-      if (getLocal.comments) {
-        dispatch({
-          type: 'QUOTE_COMMENTS',
-          name: 'comments',
-          payload: getLocal.comments,
-        });
-      }
-      if (getLocal.rating.length) {
-        let num = 0;
-        getLocal.rating.map(each => (num = num + parseInt(each)));
-        const totalRating = Math.ceil(num / getLocal.rating.length);
-        setRating(totalRating);
-      }
+      dispatch({
+        type: 'QUOTE_COMMENTS',
+        name: 'comments',
+        payload: getLocal.comments,
+      });
+      let num = 0;
+      getLocal.rating.map(each => (num = num + parseInt(each)));
+      const totalRating = Math.ceil(num / getLocal.rating.length);
+      setRating(totalRating);
     }
   };
   useEffect(() => {
@@ -66,15 +65,7 @@ const CardQuote = ({img, remove = false, changeFavorite, eachQuote}) => {
       localStorage.setItem(quoteState.quote_id, JSON.stringify(quoteState));
     }
     updateLocal();
-  };
-  const removeLocalFav = fav => {
-    const removeFav = JSON.parse(localStorage.getItem(quoteState.quote_id));
-    removeFav.isFavorite = false;
-    localStorage.setItem(removeFav.quote_id, JSON.stringify(removeFav));
-
-    //función para actualizar el estado del componente padre
-    updateLocal();
-    changeFavorite();
+    remove && changeFavorite();
   };
 
   const handlerState = (name, e) => {
@@ -94,17 +85,19 @@ const CardQuote = ({img, remove = false, changeFavorite, eachQuote}) => {
   const handleRating = ran => {
     handlerState('rating', ran);
   };
+    
   return (
     <div className="mainQuotes">
       <div className="wrapperQuote ">
         <div className="eachQuote ">
           <div className="quote">
-            <i>
+            <div className="quoteItem">
               {remove && (
                 <img src={eachQuote.img} alt={quoteState.author} width="50" />
               )}
-              {quoteState.quote}
-            </i>
+              <p>{quoteState.quote}</p>
+      
+            </div>
           </div>
           <div className="controlsQuote">
             <Rating
@@ -127,7 +120,7 @@ const CardQuote = ({img, remove = false, changeFavorite, eachQuote}) => {
             {remove && (
               <button
                 title="Remove from my favorite"
-                onClick={removeLocalFav}
+                onClick={setLocalFav}
                 className="removeFavorite">
                 <DeleteForever />
               </button>
@@ -145,12 +138,8 @@ const CardQuote = ({img, remove = false, changeFavorite, eachQuote}) => {
 };
 
 CardQuote.propTypes = {
-  quote_id: PropTypes.number,
-  quote: PropTypes.string,
-  author: PropTypes.string,
-  series: PropTypes.string,
+  eachQuote: PropTypes.object,
   img: PropTypes.string,
-  add: PropTypes.bool,
   remove: PropTypes.bool,
   changeFavorite: PropTypes.func,
 };

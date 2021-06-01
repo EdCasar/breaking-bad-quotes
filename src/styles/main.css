@@ -106,7 +106,7 @@ header nav ul li a:hover span {
 @media (max-width: 450px) {
   .home {
     width: 95%;
-    padding: .4rem; } }
+    padding: 0.4rem; } }
 
 .home .eachChar {
   border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
@@ -201,9 +201,19 @@ header nav ul li a:hover span {
   width: 100%; }
 
 .mainQuotes .wrapperQuote .eachQuote .quote {
-  color: #aaa;
-  font-size: var(--font-s-normal);
   margin: 0 1rem; }
+
+.mainQuotes .wrapperQuote .eachQuote .quote .quoteItem {
+  color: #aaa;
+  font-style: italic; }
+
+.mainQuotes .wrapperQuote .eachQuote .quote img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  object-position: 0 0;
+  border: 2px solid #043; }
 
 .mainQuotes .wrapperQuote .eachQuote .controlsQuote {
   display: flex;
@@ -247,7 +257,8 @@ header nav ul li a:hover span {
 .mainQuotes .ShowComments {
   margin: 0.5rem 0;
   width: 90%;
-  padding: 0.3rem; }
+  padding: 0.3rem;
+  border-top: 0.1rem solid #062; }
 
 .mainQuotes .ShowComments li {
   border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
@@ -257,15 +268,13 @@ header nav ul li a:hover span {
   align-items: center;
   font-style: italic;
   padding: 0.5rem;
-  background: var(--green-gradient);
   font-size: var(--font-s-normal);
   margin: 0.2rem 0;
   color: #777;
-  list-style: none;
-  box-shadow: 0.1rem 0.2rem 1rem #111 inset; }
+  list-style: none; }
 
 .mainQuotes .ShowComments p {
-  font-size: var(--font-s-normal);
+  font-size: var(--font-s-small);
   margin: 0.2rem 0;
   color: #777; }
 
@@ -276,17 +285,18 @@ header nav ul li a:hover span {
   align-items: center;
   border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
   width: 70%;
-  border: 2px solid #777;
   position: relative;
-  overflow: hidden; }
+  overflow: hidden;
+  margin-bottom: 0.5rem; }
 
 .mainQuotes .newComment input {
   width: 100%;
-  background: none;
+  background: #aaa;
   border: none;
   outline: none;
-  padding: 0.3rem;
-  color: #777; }
+  padding: 0.5rem;
+  color: #111;
+  transition: 0.5s; }
 
 .mainQuotes .newComment button {
   position: absolute;
@@ -295,7 +305,11 @@ header nav ul li a:hover span {
   border: none;
   outline: none;
   font-size: 1rem;
-  color: #777; }
+  color: #777;
+  transition: 0.5s; }
+
+.mainQuotes .newComment button:hover, .mainQuotes .newComment button:focus {
+  color: #062; }
 
 .pagination {
   display: flex;

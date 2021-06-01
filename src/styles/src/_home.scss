@@ -6,7 +6,7 @@
   background: rgba(0, 0, 0, 0.8);
   @media (max-width: 450px) {
     width: 95%;
-     padding: .4rem;
+    padding: 0.4rem;
   }
   .eachChar {
     @include border-radius();
@@ -103,9 +103,19 @@
       //display: grid;
       //grid-template-columns: 1fr 150px;
       .quote {
-        color: $white-color;
-        font-size: var(--font-s-normal);
         margin: 0 1rem;
+        .quoteItem {
+          color: $white-color;
+          font-style: italic;
+        }
+        img {
+          width: 50px;
+          height: 50px;
+          object-fit: cover;
+          border-radius: 50%;
+          object-position: 0 0;
+          border: 2px solid $green-color2;
+        }
       }
       .controlsQuote {
         @include flex(row, flex-end);
@@ -143,39 +153,45 @@
     margin: 0.5rem 0;
     width: 90%;
     padding: 0.3rem;
+    border-top: 0.1rem solid $green-color;
     li {
       @include border-radius();
       @include flex(row, flex-start);
       font-style: italic;
       padding: 0.5rem;
-      background: var(--green-gradient);
       font-size: var(--font-s-normal);
       margin: 0.2rem 0;
       color: $gray-color;
       list-style: none;
-      box-shadow: 0.1rem 0.2rem 1rem $black-color inset;
+      //box-shadow: 0.1rem 0.2rem 1rem $black-color inset;
+      //background: var(--green-gradient);
     }
-	p{
-      font-size: var(--font-s-normal);
+    p {
+      font-size: var(--font-s-small);
       margin: 0.2rem 0;
       color: $gray-color;
-	}
+    }
   }
   .newComment {
     @include flex(row, center);
     @include border-radius();
     width: 70%;
-    border: 2px solid $gray-color;
     position: relative;
     overflow: hidden;
+    margin-bottom: 0.5rem;
     input {
       width: 100%;
-      background: none;
+      background: $white-color;
       border: none;
       outline: none;
-      padding: 0.3rem;
-      color: $gray-color;
+      padding: 0.5rem;
+      color: $black-color;
+      transition: $transition;
+      &:focus,
+      &:hover {
+      }
     }
+
     button {
       position: absolute;
       right: 0;
@@ -184,6 +200,11 @@
       outline: none;
       font-size: 1rem;
       color: $gray-color;
+      transition: $transition;
+      &:hover,
+      &:focus {
+        color: $green-color;
+      }
     }
   }
 }
